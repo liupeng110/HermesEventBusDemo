@@ -36,7 +36,7 @@ public class MainActivity extends AppCompatActivity {
 
     //向子activity发送数据
     public void sendEventToChildApp(View view) {
-        HermesEventBus.getDefault().post( new MessageEvent("A message from main app !") );
+        HermesEventBus.getDefault().post( new MessageEvent("这是从主app中返回的消息！") );
     }
 
 

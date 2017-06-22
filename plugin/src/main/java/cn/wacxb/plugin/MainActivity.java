@@ -27,12 +27,12 @@ public class MainActivity extends AppCompatActivity {
     @Subscribe(threadMode = ThreadMode.MAIN)
     public void getMainAppEvent(MessageEvent messageEvent) {
         Log.i("tag","接收到："+messageEvent.getMessage());
-        Toast.makeText( MainActivity.this, "Plugin APP 方法被调用", Toast.LENGTH_SHORT ).show();
+        Toast.makeText( MainActivity.this, "Plugin APP 中 接收到消息", Toast.LENGTH_SHORT ).show();
         mTextView.setText( mTextView.getText() + "\n" + messageEvent.getMessage() );
     }
 
     public void send(View view){
-        HermesEventBus.getDefault().post( new MessageEvent("A message from main plugin !") );
+        HermesEventBus.getDefault().post( new MessageEvent("plugin里发送过来的消息！") );
     }
 
 
