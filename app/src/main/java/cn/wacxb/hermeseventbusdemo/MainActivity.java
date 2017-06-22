@@ -13,13 +13,11 @@ import cn.wacxb.ipc.entity.MessageEvent;
 import xiaofei.library.hermeseventbus.HermesEventBus;
 
 public class MainActivity extends AppCompatActivity {
-
     private TextView mTextView ;
 
     @Override protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        // register
+        setContentView(R.layout.activity_main);    //register
         HermesEventBus.getDefault().register(this);
         mTextView = (TextView) this.findViewById(R.id.textView);
     }
@@ -29,9 +27,12 @@ public class MainActivity extends AppCompatActivity {
         mTextView.setText( mTextView.getText() + "\n" + nextMessage.getMessage() );
     }
 
+
+    //按键事件,跳转到下个activity
     public void goToNext(View view) {
         startActivity( new Intent(this, NextActivity.class) );
     }
+
 
     //向子activity发送数据
     public void sendEventToChildApp(View view) {
@@ -39,16 +40,14 @@ public class MainActivity extends AppCompatActivity {
     }
 
 
-
-    @Subscribe(threadMode = ThreadMode.MAIN)
+    @Subscribe(threadMode = ThreadMode.MAIN)           //接收从子plugin发送过来的信息
     public void recive_plugin(MessageEvent messageEvent){
         mTextView.setText( mTextView.getText() + "\n" + messageEvent.getMessage() );
     }
 
 
     @Override protected void onDestroy() {
-        // unregister
-        HermesEventBus.getDefault().unregister(this);
+        HermesEventBus.getDefault().unregister(this);  //unregister
         super.onDestroy();
     }
 }
